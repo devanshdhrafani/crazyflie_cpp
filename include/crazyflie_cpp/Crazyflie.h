@@ -10,6 +10,7 @@
 #include <set>
 #include <map>
 #include <chrono>
+#include <unistd.h>
 
 #define ENABLE_SAFELINK 1
 
@@ -515,7 +516,9 @@ public:
       request.id = m_id;
       int i = 0;
       for (auto&& pair : variables) {
+        
         const Crazyflie::LogTocEntry* entry = m_cf->getLogTocEntry(pair.first, pair.second);
+
         if (entry) {
           request.items[i].logType = entry->type;
           request.items[i].id = entry->id;
